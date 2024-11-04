@@ -18,7 +18,8 @@ What we want to see is:
 1. Create a new user (POST /users)
     - Send a POST request to /users with valid data (e.g., name, gender, email, status).
     Expected results: status Code 201. Response body should include the created user’s details (e.g., id, name, email, etc.). 
-    Possible negative scenarios:     
+
+    Possible scenarios:
     - Try to create user with a duplicate email (should return an error with a duplicate email message).
     - Try to create user with unsupported data types (e.g., integer for name).
     - Test with all fields empty.
@@ -29,6 +30,7 @@ What we want to see is:
     Expected results: status Code 200. The response body should contain the correct user details (e.g., id, name, email, status).
     - Find non-existing user (GET request to /users/{user_id})
     Expected results: status Code 404.
+
     Possible scenarios:
     - Try with an invalid user_id format (e.g., alphanumeric).
     - Test with very large user_id numbers.
@@ -36,9 +38,17 @@ What we want to see is:
 3. Update existing user (PUT /users/{user_id})
     - Send a PUT request to /users/{user_id} with updated fields (e.g., change name, email, or status).
     Expected results: status Code 200. The response body should contain updated user details (e.g., id, name, email, status).
+
     Possible scenarios:
     - Try with an invalid user_id.
     - Try with an invalid data (if there's field validation)
+4. Delete existing user (DELETE /users/{user_id})
+    - Send a DELETE request to /users/{user_id} 
+    Expected results: status Code 204. 
+
+    Possible scenarios:
+    - Try with an invalid user_id.
+    - Try to delete same user twice.
 
 ## How to run
 Make sure you have node.js, npm, npx installed and all the required packages. 
@@ -70,12 +80,11 @@ From Github actions -> artifacts:  download `allure-results` folder and run
 ```allure serve path_to_downloaded_folder```
 
 ### Not included in this solution/can be improved
-This is a quick solution for demo purposes 
-- Proper instructions for running and installation for all OS; 
+This is a quick solution, not perfect.
 - bash script to install all dependencies; 
 - Environment configurations to pass to command line/read from config;
 - For requests to GET/POST/DELETE/PUT for /users helper functions can be created; 
 - Test data reading from config file or passing by command line instead of hardcoded constants; 
-- Auth token should be stored properly; 
+- Auth token should be stored properly (Bearer token had been created specifically for this project and will expire soon); 
 - Scripts in package.json to run tests in one word command and so on;
 - Test design - scenarios can be improved and extended based on the test strategy;
