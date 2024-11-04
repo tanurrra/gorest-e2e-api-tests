@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const BEARER_TOKEN = 'put-your-token-here';
 // Load environment variables (e.g., Bearer Token) from .env file or environment
-// const BEARER_TOKEN = process.env.BEARER_TOKEN || 'YOUR_TOKEN_HERE';
+const BEARER_TOKEN = process.env.BEARER_TOKEN || 'cb22b2aef20e5daa2b2bbb7e51ca4195e99987d7bb3e8c6a672b770da59aa642';
 
 // Create User Data
 const userData = {

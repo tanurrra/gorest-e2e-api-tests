@@ -1,9 +1,8 @@
 
 import { test, expect } from '@playwright/test';
 
-const BEARER_TOKEN = 'put-your-token-here';
 // Load environment variables (e.g., Bearer Token) from .env file or environment
-// const BEARER_TOKEN = process.env.BEARER_TOKEN || 'YOUR_TOKEN_HERE';
+const BEARER_TOKEN = process.env.BEARER_TOKEN || 'cb22b2aef20e5daa2b2bbb7e51ca4195e99987d7bb3e8c6a672b770da59aa642';
 
 // POST Create User Data
 const userData = {
@@ -12,6 +11,7 @@ const userData = {
   email: `john.doe.test.${Date.now()}@test.com`, // unique email to avoid duplicates
   status: 'active'
 };
+let userId: number;
 
 test.describe('Users POST Endpoint', () => {
   test('should create a new user with valid data', async ({ request }) => {
@@ -31,11 +31,22 @@ test.describe('Users POST Endpoint', () => {
       email: userData.email,
       status: userData.status
     });
+    userId = responseBody.id;
 
     // Optional: Validate specific fields
     expect(responseBody).toHaveProperty('id');
     expect(typeof responseBody.id).toBe('number');
 
     // Optional: find userID with GET and double check that user has been created 
+  });
+
+  test.afterAll(async ({ request }) => {
+    // Clean up: delete the user after the test
+    const deleteResponse = await request.delete(`public/v2/users/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${BEARER_TOKEN}`
+      }
+    });
+    expect(deleteResponse.status()).toBe(204);
   });
 });
