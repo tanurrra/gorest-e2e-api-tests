@@ -1,0 +1,15 @@
+{
+  "name": "gorest-e2e-tests",
+  "version": "1.0.0",
+  "description": "E2E API tests for Gorest service",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Tatyana",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.48.2",
+    "@types/node": "^22.8.7",
+    "allure-playwright": "^3.0.6"
+  }
+}
